@@ -6,7 +6,7 @@ function addtodo(){
 	var data = loadData();
     var todo = document.getElementById('todo');
     var ready = document.getElementById('ready');
-	var todoadd={"todo":todo.value,"anumber":data.length+1,"done":false};
+	var todoadd={"todo":todo.value,"anumber":data.length,"done":false};
 	data.push(todoadd);
 	todo.value="";
 	localStorage.setItem("add",JSON.stringify(data));
@@ -19,7 +19,7 @@ function get(){
 function deletetodo(i){
 	var collect = get();
 	collect.splice(i,1);
-	for(var i = collect.length-1;i>=0;i--){
+	for(var i = collect.length-1;i>=1;i--){
 	collect[i].anumber = i;
 	}
 	reload(collect);
@@ -58,7 +58,7 @@ function loadData(){
 		return JSON.parse(mid);
 	}
 	else{
-		return [];
+		return [1];
 	}
 }
 function Load(){
@@ -72,9 +72,7 @@ function Load(){
 	var doneString = "";
     var readynumber1 = 0;
 	var donenumber1 = 0; 
-	if(collect.length != 0){
-		console.log(0);
-	for(var i = collect.length-1;i>=0;i--){
+	for(var i = collect.length-1;i>=1;i--){
 		if(collect[i].done ){
 	   doneString += `<li id="p-${collect[i].anumber}"><p onclick="edit(${i})" ><a style:"float:left" href="javascript:deletetodo(${i})">-</a>${collect[i].todo}<a style="float:right" href="javascript:add(${i})">+</a></p></li>`;
 	   donenumber1++;
@@ -82,7 +80,6 @@ function Load(){
 	else {
 		todoString += `<li id="p-${collect[i].anumber}"><p onclick="edit(${i})" ><a style:"float:left" href="javascript:deletetodo(${i})">-</a>${collect[i].todo}<a style="float:right" href="javascript:add(${i})">+</a></p></li>`;
 		readynumber1++;
-	}
 	}
 	}
 	readynumber.innerHTML = readynumber1;
