@@ -72,6 +72,7 @@ function Load(){
 	var doneString = "";
     var readynumber1 = 0;
 	var donenumber1 = 0; 
+	console.log(collect);
 	for(var i = collect.length-1;i>=1;i--){
 		if(collect[i].done ){
 	   doneString += `<li id="p-${collect[i].anumber}"><p onclick="edit(${i})" ><a style:"float:left" href="javascript:deletetodo(${i})">-</a>${collect[i].todo}<a style="float:right" href="javascript:add(${i})">+</a></p></li>`;
