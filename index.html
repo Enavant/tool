@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>跬步</title>
+		<style>
+			.top{
+				background-color:#BFBFBF ;
+				height: 80px;
+			}
+			.logo{
+				
+				float: left;
+				
+			}
+			.add{
+				width:70%;
+				height: 40px;
+				float: right;
+				margin-top:20px ;
+				border-radius: 150px;
+				text-indent: 10px;
+				font-size: 20px;
+				border: 8px #BFBFBF;
+				-webkit-transition: 0.5s;
+				outline: none;
+				transition: 0.5s;
+			}
+			.add:focus{
+				border:  #8F8F8F ;
+				border-radius: 5px;
+			}
+			.add2{
+				width:40%;
+				height: 20px;
+				float: left;
+				margin-top:0px ;
+				border-radius: 150px;
+				text-indent: 10px;
+				font-size: 20px;
+				border: 8px #BFBFBF;
+				-webkit-transition: 0.5s;
+				outline: none;
+				transition: 0.5s;
+			}
+			.add2:focus{
+				border:  #8F8F8F ;
+				border-radius: 5px;
+			}
+			.top2{
+				margin: 0 auto;
+				width: 720px;
+				height: 200px;
+			}
+			.main{
+				margin: 0 auto;
+				width:720px;
+				}
+			.mainnumber{
+				margin: 0 auto;
+				position: relative;
+				left: 580px;
+			}
+			.foot{
+				width: 720px;
+				margin:80px auto;
+				position: relative;
+				left: 215px;
+			}
+			a{
+				font-size: 40px;
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body style="margin: 0;padding: 0;background: #DFDFDF;" onload="Load()">
+		
+     <div class="top">
+		 <div class="top2">
+		
+			<h1 class="logo">ToDoList</h1>
+		<input class="add" placeholder="这次要搞什么事情呢？" id="todo" autocomplete="off" type="text" required="required"  onkeypress="Check(event)"> 
+		
+		</div>
+	 </div>
+	<div class="main">
+		<h2 >待完成的事务<span class="mainnumber" id="readynumber">0</span></h2>
+		<ul id="ready">
+			
+		</ul>
+		<h2>已完成的事务<span class="mainnumber" id="donenumber">0</span></h2>
+		<ul id="done">		
+		</ul>
+	</div>
+	<div class="foot">
+		<span>&copy; 2020 Poem, ALL RIGHTS RESERVED</span>
+	</div>
+    <script src="js/control.js"></script>
+	</body>
+</html>
+
+
