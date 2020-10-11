@@ -1,6 +1,5 @@
 function clear(){
 	localStorage.clear();
-	Load();
 }
 function addtodo(){
 	var data = loadData();
@@ -9,8 +8,55 @@ function addtodo(){
 	var todoadd={"todo":todo.value,"anumber":data.length,"done":false};
 	data.push(todoadd);
 	todo.value="";
-	localStorage.setItem("add",JSON.stringify(data));
+	reload(data);
 	Load();
+}
+function uptodo(anumber){
+	var data = loadData();
+	var s = 0;
+	var i = 0;
+	for(i =0;i<data.length;i++){
+		
+		if(anumber<i&&data[anumber].done==data[i].done){
+			var temp = data[anumber];
+			data[anumber] = data[i];
+			data[i] = temp;
+			var temp = data[anumber].anumber;
+			data[anumber].anumber = data[i].anumber;
+			data[i].anumber = temp;
+			reload(data);
+			Load();
+			console.log(data[i].anumber);
+			break;
+		}
+	}
+	if(i==data.length){
+		alert("当前任务已经在首位了");
+		Load();
+	}
+}
+function downtodo(anumber){
+	var data =  loadData();
+	var s = 0;
+	var i = 0;
+	for(i =data.length-1;i>=0;i--){
+		if(anumber>i&&data[anumber].done==data[i].done){
+			var temp = data[anumber];
+			data[anumber] = data[i];
+			data[i] = temp;
+			var temp = data[anumber].anumber;
+			data[anumber].anumber = data[i].anumber;
+			data[i].anumber = temp;
+			reload(data);
+			Load();
+			console.log(data[i].anumber);
+			break;
+	}
+	if(i<=0){
+		alert("当前任务已经在底部了");
+		Load();
+		}
+}
 }
 function get(){
 	var s = localStorage.getItem("add");
@@ -62,6 +108,7 @@ function loadData(){
 	}
 }
 function Load(){
+	
 	var readynumber = document.getElementById('readynumber');
 	var donenumber = document.getElementById("donenumber");
 	var collect = loadData();
@@ -73,12 +120,13 @@ function Load(){
     var readynumber1 = 0;
 	var donenumber1 = 0; 
 	for(var i = collect.length-1;i>=0;i--){
-		if(collect[i].done ){
-	   doneString += `<li id="p-${collect[i].anumber}"><p onclick="edit(${i})" ><a style:"float:left" href="javascript:deletetodo(${i})">-</a>${collect[i].todo}<a style="float:right" href="javascript:add(${i})">+</a></p></li>`;
+		console.log(collect[i].anumber)
+		if(collect[i].done){
+	   doneString += `<li id="p-${collect[i].anumber}"><p onclick="edit(${i})"><a style="float:left;color:#6dbcdb" class="fa fa-level-down fa-lg" href="javascript:downtodo(${collect[i].anumber})"></a><a style="float:left;color:#6dbcdb" class="fa fa-level-up fa-lg" href="javascript:uptodo(${collect[i].anumber})"></a><a style="float:left;color:#6dbcdb" class="fa fa-minus-circle fa-lg" href="javascript:deletetodo(${i})"></a>${collect[i].todo}<a style="float:right;color:#6dbcdb" href="javascript:add(${i})" class="fa fa-plus-circle fa-lg"></a></p></li>`;
 	   donenumber1++;
 	}
 	else {
-		todoString += `<li id="p-${collect[i].anumber}"><p onclick="edit(${i})" ><a style:"float:left" href="javascript:deletetodo(${i})">-</a>${collect[i].todo}<a style="float:right" href="javascript:add(${i})">+</a></p></li>`;
+		todoString += `<li id="p-${collect[i].anumber}"><p onclick="edit(${i})" ><a style="float:left;color:#6dbcdb" class="fa fa-level-down fa-lg" href="javascript:downtodo(${collect[i].anumber})"></a><a style="float:left;color:#6dbcdb" class="fa fa-level-up fa-lg" href="javascript:uptodo(${collect[i].anumber})"></a><a style="float:left;color:#6dbcdb" class="fa fa-minus-circle fa-lg" href="javascript:deletetodo(${i})"></a>${collect[i].todo}<a style="float:right;color:#6dbcdb" href="javascript:add(${i})" class="fa fa-plus-circle fa-lg"></a></p></li>`;
 		readynumber1++;
 	}
 	}
